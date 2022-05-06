@@ -2,7 +2,10 @@ import requests
 import json
 from bs4 import BeautifulSoup
 
-url = 'https://www.ceneo.pl/101052360/opinie-1'
+selected_product_id = input("Enter selected product ID: ")
+#test product_id: 101052360
+
+url = f'https://www.ceneo.pl/{selected_product_id}/opinie-1'
 
 all_opinions = []
 
@@ -15,8 +18,10 @@ while url:
     for opinion in opinions:
         opinion_id = opinion['data-entry-id']
         author = opinion.select_one('span.user-post__author-name').get_text().strip()
-        recommendation = opinion.select_one('span.user-post__author-recomendation > em').get_text()
-        recommendation = True if recommendation == 'Polecam' else False
+        try:
+            recommendation = opinion.select_one('span.user-post__author-recomendation > em').get_text()
+        except AttributeError:
+            recommendation = None
         stars = opinion.select_one('span.user-post__score-count').get_text()
         content = opinion.select_one('div.user-post__text').get_text()
         useful = opinion.select_one('button.vote-yes > span').get_text()
@@ -47,6 +52,6 @@ while url:
     except TypeError:
         url = None
 
-with open("opinions/101052360.json", 'w', encoding='UTF-8') as file:
+with open(f"opinions/{selected_product_id}.json", 'w', encoding='UTF-8') as file:
     json.dump(all_opinions, file, indent=4, ensure_ascii=False)
 
