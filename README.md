@@ -17,3 +17,13 @@
 |data wystawienia opinii|span.user-post__published > time:nth-child(1)\["datetime"\]|published||
 |data zakupy produktu|span.user-post__published > time:nth-child(2)\["datetime"\]|purchased||
 
+## Etapy pracy nad projektem
+1. Pobranie elementów pojedynczej opinii do niezależnych zmiennych
+2. Zapisanie wszystkich elemntów pojedynczej opinii do jednej zmiennej \(słownik\)
+3. Pobranie wszystkich opinii z pojedynczej strony do słowników i dodnie ich do listy
+4. Pobranie wszystkich opinii o produkcie z wszystkich stron i zapisanie ich do pliku .json
+5. Dodanie możliowści podania id produktu przez użytkownika za pomocą klawiatury
+6. Refaktoryzacja \(optymalizacja\) kodu:
+    a. utworzenie funkcji do pobierania składowych strony HTML
+    b. utworzenie słownika opisującego strukturę opinii wraz z selektorami poszczególnych elementów
+    c. zamiana instrukcji pobierających składowe opinii do pojedynczych zmiennych i tworzących z nich słownik na wyrażenie słownikowe \(dictionary comprehension\) tworzące słownik reprezentujący pojedynczą opinię na podstawie słownika selektorów
